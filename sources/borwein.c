@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:24:36 2013 marc benzahra
-** Last update Mon Apr  8 17:06:37 2013 marc benzahra
+** Last update Mon Apr  8 17:24:51 2013 marc benzahra
 */
 
 #include "../includes/borwein.h"
@@ -20,10 +20,10 @@ void	prompt(double nb1, double nb2, int n, int option)
     printf("méthode de Simpson\n");
   else
     return ;
-  printf("\tI%d = (%f)\n\tdiff = (%f)\n", n, nb1, nb2);
+  printf("\tI%d = (%.10f)\n\tdiff = (%.10f)\n", n, nb1, nb2);
 }
 
-void		borwein(int n)
+void		rectangles(int n)
 {
   double	i = 0;
   double	k;
@@ -46,6 +46,22 @@ void		borwein(int n)
       result = result + res;
       i = i + 1;
     }
+  prompt(result, result - (M_PI / 2), n, 1);
   result = result * h;
-  prompt(result, result - M_PI, n, 1);
+  prompt(result, result - (M_PI / 2), n, 1);
+}
+
+void		trapezes(int n)
+{
+}
+
+void		simpson(int n)
+{
+}
+
+void		borwein(int n)
+{
+  rectangles(n);
+  trapezes(n);
+  simpson(n);
 }
