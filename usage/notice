@@ -1,0 +1,7 @@
+SDL Usage :
+Echap				 -> ferme la fenetre SDL
+Espace				 -> mute le volume
+Flèche directionnelle gauche	 -> reduire le volume
+Flèche directionnelle droite 	 -> augmente le volume
+Flèche directionnelle haute 	 -> change de son (ROBOT UNICORN ATK FTW)
+Flèche directionnelle basse 	 -> change de son (ROI HEENOK FTW)
