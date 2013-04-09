@@ -5,7 +5,7 @@
 ## Login   <benzah_m@epitech.net>
 ## 
 ## Started on  Mon Apr  8 15:31:25 2013 marc benzahra
-## Last update Mon Apr  8 18:10:38 2013 marc benzahra
+## Last update Tue Apr  9 14:12:11 2013 marc benzahra
 ##
 
 SRC	=	sources/main.c		\
@@ -18,6 +18,8 @@ RM	=	rm -f
 CC	=	cc
 
 NAME	=	110borwein
+
+LIB	=	-lm -lSDL -lSDL_mixer
 
 RESET=		\033[0m
 BIG=		\033[1;01m
@@ -41,10 +43,10 @@ B_PINK=		\033[1;45m
 B_GAYBLUE=	\033[1;46m
 B_WHITE=	\033[1;47m
 
-all:	$(NAME)
+all:	unicorn $(NAME) howto
 
 $(NAME):	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ) -lm
+	$(CC) -o $(NAME) $(OBJ) $(LIB)
 
 clean:
 	$(RM) $(OBJ) $(OBJ_SDL)

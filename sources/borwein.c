@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:24:36 2013 marc benzahra
-** Last update Tue Apr  9 13:39:50 2013 marc benzahra
+** Last update Tue Apr  9 14:10:52 2013 marc benzahra
 */
 
 #include "../includes/borwein.h"
@@ -97,9 +97,93 @@ void		simpson(double n)
   prompt(final, final - (M_PI / 2), n, 3);
 }
 
+Mix_Music	*set_music(char *str)
+{
+  Mix_Music	*music;
+
+  if ((music = Mix_LoadMUS(str)) == NULL)
+    {
+      printf("%s\n", Mix_GetError());
+      exit(EXIT_FAILURE);
+    }
+  if (Mix_PlayMusic(music, -1) == -1)
+    {
+      printf("%s\n", Mix_GetError());
+      exit(EXIT_FAILURE);
+    }
+  return (music);
+}
+
+void		event_story_bro(Mix_Music *music, int volume, SDL_Event event)
+{
+  int	go;
+
+  go = 1;
+  while (go)
+    {
+      SDL_WaitEvent(&event);
+      switch (event.type)
+	{
+	case SDL_KEYDOWN:
+	  switch (event.key.keysym.sym)
+	    {
+	    case SDLK_ESCAPE:
+	      go = 0;
+	      break;
+	    case SDLK_SPACE:
+	      if (Mix_VolumeMusic(-1) > 0)
+		Mix_VolumeMusic(0);
+	      else
+		Mix_VolumeMusic(volume);
+	      break;
+	    case SDLK_LEFT:
+	      if (volume - 10 > 0)
+		Mix_VolumeMusic((volume = volume - 10));
+	      break;
+	    case SDLK_RIGHT:
+	      if (volume + 10 < 128)
+		Mix_VolumeMusic((volume = volume + 10));
+	      break;
+	    case SDLK_UP:
+	      {
+		Mix_FreeMusic(music);
+		music = set_music("songs/shit_gets_real.wav");
+	      }
+	      break;
+	    case SDLK_DOWN:
+	      {
+		Mix_FreeMusic(music);
+		music = set_music("songs/chirac.wav");
+	      }
+	      break;
+	    }
+	  break;
+	}
+    }
+}
+
 void		borwein(double n)
 {
+  int		volume;
+  SDL_Surface	*screen;
+  SDL_Event	event;
+  Mix_Music	*music;
+
+  SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+  if ((screen = SDL_SetVideoMode(1, 1, 32, SDL_HWSURFACE)) == NULL)
+    exit_write("video mode failed");
+  if (Mix_OpenAudio(22050, AUDIO_S16, 2, 4096) == -1)
+    {
+      printf("%s\n", Mix_GetError());
+      exit(EXIT_FAILURE);
+    }
+  music = set_music("songs/draaaaagoooonz.wav");
+  volume = Mix_VolumeMusic(-1);
   rectangles(n);
   trapezes(n);
   simpson(n);
+  event_story_bro(music, volume, event);
+  Mix_FreeMusic(music);
+  Mix_CloseAudio();
+  SDL_Quit();
 }
