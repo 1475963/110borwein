@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:24:36 2013 marc benzahra
-** Last update Tue Apr  9 14:10:52 2013 marc benzahra
+** Last update Tue Apr  9 15:50:13 2013 marc benzahra
 */
 
 #include "../includes/borwein.h"
@@ -30,7 +30,7 @@ double		produit(double n, double x)
 
   while (k <= n)
     {
-      if (((2 * k) + 1) != 0 && (x / ((2 * k) + 1)) != 0)
+      if (x != 0)
 	res = res * (sin(x / ((2 * k) + 1)) / (x / ((2 * k) + 1)));
       k = k + 1;
     }
@@ -169,14 +169,12 @@ void		borwein(double n)
   SDL_Event	event;
   Mix_Music	*music;
 
-  SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
+    exit_write("sdl failed to initialize");
   if ((screen = SDL_SetVideoMode(1, 1, 32, SDL_HWSURFACE)) == NULL)
     exit_write("video mode failed");
   if (Mix_OpenAudio(22050, AUDIO_S16, 2, 4096) == -1)
-    {
-      printf("%s\n", Mix_GetError());
-      exit(EXIT_FAILURE);
-    }
+    exit_write("sdl_mixer failed to open audio channels");
   music = set_music("songs/draaaaagoooonz.wav");
   volume = Mix_VolumeMusic(-1);
   rectangles(n);
