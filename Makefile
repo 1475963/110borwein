@@ -5,19 +5,27 @@
 ## Login   <benzah_m@epitech.net>
 ## 
 ## Started on  Mon Apr  8 15:31:25 2013 marc benzahra
-## Last update Tue Apr  9 14:12:11 2013 marc benzahra
+## Last update Tue Apr  9 15:21:19 2013 marc benzahra
 ##
 
 SRC	=	sources/main.c		\
 		sources/borwein.c	\
 
+SRC_LOAD=	loading/common.c	\
+		loading/loading.c	\
+		loading/showit.c	\
+
 OBJ	=	$(SRC:.c=.o)
+
+OBJ_LOAD=	$(SRC_LOAD:.c=.o)
 
 RM	=	rm -f
 
 CC	=	cc
 
 NAME	=	110borwein
+
+LOAD	=	loading/loading
 
 LIB	=	-lm -lSDL -lSDL_mixer
 
@@ -43,18 +51,26 @@ B_PINK=		\033[1;45m
 B_GAYBLUE=	\033[1;46m
 B_WHITE=	\033[1;47m
 
-all:	unicorn $(NAME) howto
+all:	unicorn $(LOAD) wait $(NAME) howto
+
+$(LOAD):	$(OBJ_LOAD)
+	$(CC) -o $(LOAD) $(OBJ_LOAD)
 
 $(NAME):	$(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(LIB)
 
 clean:
-	$(RM) $(OBJ) $(OBJ_SDL)
+	$(RM) $(OBJ_LOAD) $(OBJ)
 
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(LOAD) $(NAME)
 
 re:	fclean all
+
+.PHONY:	all clean fclean re
+
+wait:	
+	@./loading/loading
 
 unicorn:
 	@clear
