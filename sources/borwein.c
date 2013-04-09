@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:24:36 2013 marc benzahra
-** Last update Mon Apr  8 17:24:51 2013 marc benzahra
+** Last update Tue Apr  9 11:43:54 2013 marc benzahra
 */
 
 #include "../includes/borwein.h"
@@ -23,30 +23,38 @@ void	prompt(double nb1, double nb2, int n, int option)
   printf("\tI%d = (%.10f)\n\tdiff = (%.10f)\n", n, nb1, nb2);
 }
 
+double		produit(double n, double x)
+{
+  double	res = 1;
+  int		k = 0;
+
+  while (k <= n)
+    {
+      if (((2 * k) + 1) != 0 && (x / ((2 * k) + 1)) != 0)
+	res = res * (sin(x / ((2 * k) + 1)) / (x / ((2 * k) + 1)));
+      k = k + 1;
+    }
+  return (res);
+}
+
 void		rectangles(int n)
 {
-  double	i = 0;
-  double	k;
-  long double	res;
-  long double	result;
+  double	i;
+  double	result;
   double	h;
+  double	a;
+  double	b;
 
-  h = 5000 / n;
+  a = 0;
+  b = 5000;
+  h = (b - a) / 10000;
   result = 0;
-  while (i < 9999)
+  i = a;
+  while (i < b)
     {
-      k = 0;
-      res = 1;
-      while (k < n)
-	{
-	  if (((2 * k) + 1) != 0 && ((i * h) / ((2 * k) + 1)) != 0)
-	    res = res * (sin((i * h) / ((2 * k) + 1)) / ((i * h) / ((2 * k) + 1)));
-	  k = k + 1;
-	}
-      result = result + res;
-      i = i + 1;
+      result = result + produit(n, i);
+      i = i + h;
     }
-  prompt(result, result - (M_PI / 2), n, 1);
   result = result * h;
   prompt(result, result - (M_PI / 2), n, 1);
 }
