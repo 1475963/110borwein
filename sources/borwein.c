@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:24:36 2013 marc benzahra
-** Last update Tue Apr  9 11:59:39 2013 marc benzahra
+** Last update Tue Apr  9 13:19:30 2013 marc benzahra
 */
 
 #include "../includes/borwein.h"
@@ -20,7 +20,7 @@ void	prompt(double nb1, double nb2, double n, int option)
     printf("méthode de Simpson\n");
   else
     return ;
-  printf("\tI%d = (%.10f)\n\tdiff = (%.10f)\n", n, nb1, nb2);
+  printf("\tI%.0f = %.10f\n\tdiff = %.10f\n", n, nb1, nb2);
 }
 
 double		produit(double n, double x)
@@ -41,13 +41,14 @@ void		rectangles(double n)
 {
   double	a = 0;
   double	b = 5000;
+  double	i = a;
   double	h = (b - a) / 10000;
   double	result = 0;
 
-  while (a < b)
+  while (i < b)
     {
-      result = result + produit(n, a);
-      a = a + h;
+      result = result + produit(n, i);
+      i = i + h;
     }
   result = result * h;
   prompt(result, result - (M_PI / 2), n, 1);
@@ -55,6 +56,20 @@ void		rectangles(double n)
 
 void		trapezes(double n)
 {
+  double	a = 0;
+  double	b = 5000;
+  double	i = a;
+  double	h = (b - a) / (2 * 10000);
+  double	result = 0;
+
+  i = 1;
+  while (i < b)
+    {
+      result = result + produit(n, i);
+      i = i + h;
+    }
+  result = ((result * 2) + produit(n, a) + produit(n, b)) * h;
+  prompt(result, result - (M_PI / 2), n, 2);
 }
 
 void		simpson(double n)
