@@ -5,12 +5,12 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:24:36 2013 marc benzahra
-** Last update Tue Apr  9 11:43:54 2013 marc benzahra
+** Last update Tue Apr  9 11:59:39 2013 marc benzahra
 */
 
 #include "../includes/borwein.h"
 
-void	prompt(double nb1, double nb2, int n, int option)
+void	prompt(double nb1, double nb2, double n, int option)
 {
   if (option == 1)
     printf("méthode des rectangles\n");
@@ -37,37 +37,31 @@ double		produit(double n, double x)
   return (res);
 }
 
-void		rectangles(int n)
+void		rectangles(double n)
 {
-  double	i;
-  double	result;
-  double	h;
-  double	a;
-  double	b;
+  double	a = 0;
+  double	b = 5000;
+  double	h = (b - a) / 10000;
+  double	result = 0;
 
-  a = 0;
-  b = 5000;
-  h = (b - a) / 10000;
-  result = 0;
-  i = a;
-  while (i < b)
+  while (a < b)
     {
-      result = result + produit(n, i);
-      i = i + h;
+      result = result + produit(n, a);
+      a = a + h;
     }
   result = result * h;
   prompt(result, result - (M_PI / 2), n, 1);
 }
 
-void		trapezes(int n)
+void		trapezes(double n)
 {
 }
 
-void		simpson(int n)
+void		simpson(double n)
 {
 }
 
-void		borwein(int n)
+void		borwein(double n)
 {
   rectangles(n);
   trapezes(n);

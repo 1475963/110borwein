@@ -5,10 +5,10 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:13:27 2013 marc benzahra
-** Last update Mon Apr  8 17:04:57 2013 marc benzahra
+** Last update Tue Apr  9 11:56:36 2013 marc benzahra
 */
 
-#include "../includes/borwein.h"
+#include "../includes/main.h"
 
 void	exit_error(char *function, char *file, char *block)
 {
@@ -34,7 +34,7 @@ void	check_arg(char *av)
       exit_write("Please put correct arguments");
 }
 
-int	check_n(int n)
+double	check_n(double n)
 {
   if (n > 0)
     return (n);
@@ -42,12 +42,12 @@ int	check_n(int n)
     exit_write("n must be a positive number, not equal to 0");
 }
 
-int	main(int ac, char **av)
+void	main(int ac, char **av)
 {
   if (ac == 2)
     {
       check_arg(av[1]);
-      borwein(check_n(atoi(av[1])));
+      borwein(check_n(atof(av[1])));
     }
   else
     exit_write("Usage\t./110borwein [n]\tWhen n is a positive number, not equal to 0");

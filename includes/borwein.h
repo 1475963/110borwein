@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:14:57 2013 marc benzahra
-** Last update Mon Apr  8 15:16:28 2013 marc benzahra
+** Last update Tue Apr  9 12:01:02 2013 marc benzahra
 */
 
 #ifndef BORWEIN_H_
@@ -15,6 +15,11 @@
 # include <stdio.h>
 # include <string.h>
 
-int	main(int ac, char **av);
+void	prompt(double nb1, double nb2, double n, int option);
+double	produit(double n, double x);
+void	rectangles(double n);
+void	trapezes(double n);
+void	simpson(double n);
+void	borwein(double n);
 
 #endif /* !BORWEIN_H_ */
