@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:13:27 2013 marc benzahra
-** Last update Tue Apr  9 12:16:12 2013 marc benzahra
+** Last update Fri Apr 12 12:33:39 2013 marc benzahra
 */
 
 #include "../includes/main.h"
@@ -36,10 +36,10 @@ void	check_arg(char *av)
 
 double	check_n(double n)
 {
-  if (n > 0)
+  if (n >= 0)
     return (n);
   else
-    exit_write("n must be a positive number, not equal to 0");
+    exit_write("n must be a number positive or equal to 0");
 }
 
 void	main(int ac, char **av)
@@ -50,5 +50,5 @@ void	main(int ac, char **av)
       borwein(check_n(atof(av[1])));
     }
   else
-    exit_write("Usage\t./110borwein [n]\tWhen n is a positive number, not equal to 0");
+    exit_write("Usage\t./110borwein [n]\tWhen n is a number superior or equal to 0");
 }

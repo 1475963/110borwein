@@ -5,7 +5,7 @@
 ** Login   <benzah_m@epitech.net>
 ** 
 ** Started on  Mon Apr  8 15:24:36 2013 marc benzahra
-** Last update Tue Apr  9 15:50:13 2013 marc benzahra
+** Last update Fri Apr 12 13:34:48 2013 marc benzahra
 */
 
 #include "../includes/borwein.h"
@@ -47,8 +47,8 @@ void		rectangles(double n)
 
   while (i < b)
     {
-      result = result + produit(n, i);
-      i = i + h;
+      result = result + produit(n, (a + i * h));
+      i = i + 1;
     }
   result = result * h;
   prompt(result, result - (M_PI / 2), n, 1);
@@ -58,17 +58,16 @@ void		trapezes(double n)
 {
   double	a = 0;
   double	b = 5000;
-  double	i = a;
+  double	i = 1;
   double	h = (b - a) / 10000;
   double	result = 0;
 
-  i = 1;
   while (i < b)
     {
-      result = result + produit(n, i);
-      i = i + h;
+      result = result + produit(n, (a + i * h));
+      i = i + 1;
     }
-  result = ((result * 2)/* + produit(n, a) */+ produit(n, b)) * ((b - a) / 20000);
+  result = ((result * 2) + produit(n, a) + produit(n, b)) * ((b - a) / 20000);
   prompt(result, result - (M_PI / 2), n, 2);
 }
 
@@ -84,16 +83,16 @@ void		simpson(double n)
 
   while (i < b)
     {
-      result = result + produit(n, i + (h / 2));
-      i = i + h;
+      result = result + produit(n, (a + i * h) + (h / 2));
+      i = i + 1;
     }
   i = 1;
   while (i < b)
     {
-      res = res + produit(n, i);
-      i = i + h;
+      res = res + produit(n, (a + i * h));
+      i = i + 1;
     }
-  final = ((result * 4) + (res * 2)/* + produit(n, a) */+ produit(n, b)) * ((b - a) / 60000);
+  final = ((result * 4) + (res * 2) + produit(n, a) + produit(n, b)) * ((b - a) / 60000);
   prompt(final, final - (M_PI / 2), n, 3);
 }
 
